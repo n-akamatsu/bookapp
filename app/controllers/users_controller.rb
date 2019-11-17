@@ -13,9 +13,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      flash[:success] = "bookappへようこそ！"
-      redirect_to @user
+      @user.send_activation_email
+      flash[:info] = "アカウントを有効化するために届いたメールを確認してください"
+      redirect_to @user  #最終的にはroot_urlに変更。エラー回避のため一時的に
     else
       render 'new'
     end

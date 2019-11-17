@@ -1,0 +1,5 @@
+こんにちは <%= @user.name %>さん,
+
+bookappへようこそ!以下をクリックしてアカウントを有効化しよう！
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>

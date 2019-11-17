@@ -33,7 +33,6 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'users/show'
-    assert is_logged_in?
   end
 
   test "login with valid information followed by logout" do
