@@ -8,7 +8,8 @@ class MicropostsController < ApplicationController
       flash[:success] = "Micropostを作成しました"
       redirect_to root_url
     else
-      @feed_items = []
+      # @feed_items = []   railsチュートリアルでは一時的にこれにしてる
+      @feed_items = current_user.feed.paginate(page: params[:page])
       render 'static_pages/home'
     end
   end
