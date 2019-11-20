@@ -5,6 +5,8 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
+      @mypost = Mypost.new(content: @micropost.content, picture: @micropost.picture)
+      @mypost.save
       flash[:success] = "Micropostを作成しました"
       redirect_to root_url
     else
@@ -19,6 +21,12 @@ class MicropostsController < ApplicationController
     flash[:success] = "Micropostが削除されました"
     redirect_to request.referrer || root_url
     # request.referrer  このメソッドは一つ前のURLを返します
+  end
+
+  def transport
+    @micropost = Micropost.new(content: params[:content], picture: params[:picture])
+    @micropost.save
+    redirect_to root_url
   end
 
   private

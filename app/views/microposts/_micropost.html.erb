@@ -17,7 +17,7 @@
         <span class="fa fa-heart like-btn"></span>
       <% end %>
     <% end %>
-    <%# <%= @likes.count %> 
+    <%= @likes_count = Like.where(post_id: micropost.id).count %>
     <%= time_ago_in_words(micropost.created_at) %>前
     <% if current_user?(micropost.user) %>
       <%= link_to "削除", micropost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
