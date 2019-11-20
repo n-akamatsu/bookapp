@@ -1,0 +1,31 @@
+<li id="mypost-<%= mypost.id %>">
+  <!-- 上記のidはjQueryをつけるとき用 -->
+
+  <!-- ユーザーの写真 -->
+  <span class="user"><%= link_to mypost.user.name, mypost.user %></span>
+  <span class="content">
+    <%= mypost.content %>
+    <%= image_tag mypost.picture.url if mypost.picture? %>
+  </span>
+  <span class="timestamp">
+    <% if Like.find_by(user_id: @current_user.id, post_id: mypost.id) %>
+      <%= link_to("/likes/#{mypost.id}/destroy", {method: "post"}) do %>
+        <span class="fa fa-heart like-btn-unlike"></span>
+      <% end %>
+    <% else %>
+      <%= link_to("/likes/#{mypost.id}/create", {method: "post"}) do %>
+        <span class="fa fa-heart like-btn"></span>
+      <% end %>
+    <% end %>
+    <%= time_ago_in_words(mypost.created_at) %>前
+    <% if current_user?(mypost.user) %>
+      <%= link_to "削除", mypost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+
+      <%= form_tag("/microposts/transport") do %>
+        <%= hidden_field_tag :content, @mypost.content %>
+        <%= hidden_field_tag :picture, @mypost.picture %>
+        <input type="submit" value="「みんなの投稿」にも投稿！">
+      <% end %>
+    <% end %>
+  </span>
+</li>

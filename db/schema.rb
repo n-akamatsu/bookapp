@@ -1,4 +1,11 @@
-ActiveRecord::Schema.define(version: 20191118082717) do
+ActiveRecord::Schema.define(version: 20191119105346) do
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "microposts", force: :cascade do |t|
     t.text "content"
@@ -8,6 +15,16 @@ ActiveRecord::Schema.define(version: 20191118082717) do
     t.string "picture"
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "myposts", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "picture"
+    t.index ["user_id", "created_at"], name: "index_myposts_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_myposts_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|

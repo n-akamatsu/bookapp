@@ -9,6 +9,13 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
+    @myposts = @user.microposts.paginate(page: params[:page])
+  end
+
+  def mypage
+    @user = User.find_by(id: params[:id])
+    @myposts = @user.myposts.paginate(page: params[:page])
+    @mypost = current_user.myposts.build if logged_in?
   end
 
   def create
