@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 class CreateLikes < ActiveRecord::Migration[5.1]
   def change
     create_table :likes do |t|
@@ -9,7 +8,6 @@ class CreateLikes < ActiveRecord::Migration[5.1]
     end
   end
 end
-=======
 class CreateLikes < ActiveRecord::Migration[5.1]
   def change
     create_table :likes do |t|
@@ -20,4 +18,3 @@ class CreateLikes < ActiveRecord::Migration[5.1]
     end
   end
 end
->>>>>>> user-myposts
