@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class LikeTest < ActiveSupport::TestCase
-<<<<<<< HEAD
 
   def setup
     @user = users(:michael)
@@ -18,9 +17,7 @@ class LikeTest < ActiveSupport::TestCase
     @like.post_id = nil
     assert_not @like.valid?
   end
-=======
   # test "the truth" do
   #   assert true
   # end
->>>>>>> user-myposts
 end

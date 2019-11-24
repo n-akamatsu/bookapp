@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post "likes/:micropost_id/destroy" => "likes#destroy"
   post "microposts/transport" => "microposts#transport"
   get "static_pages/follow_page" => "static_pages#follow_page"
+  get 'auth/:provider/callback', to: 'sessions#create'
 
   root 'static_pages#home'
   get    '/home', to: 'static_pages#home'

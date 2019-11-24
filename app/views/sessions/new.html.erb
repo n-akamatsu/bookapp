@@ -20,6 +20,17 @@
       <%= f.submit "ログイン", class: "btn btn-primary" %>
     <% end %>
 
+    <p>
+      <%= link_to '/auth/twitter', class: "btn btn-social btn-twitter" do %>
+        <span class="fa fa-twitter"></span> Twitterアカウントでログイン
+      <% end %>
+    </p>
+    <p>
+      <%= link_to '/auth/facebook', class: "btn btn-social btn-facebook" do %>
+        <span class="fa fa-facebook"></span> Facebookアカウントでログイン
+      <% end %>
+    </p>
+
     <p>新規登録がまだですか? <%= link_to "始めよう!", signup_path %></p>
   </div>
 </div>
