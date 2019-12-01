@@ -1,24 +1,35 @@
-<% provide(:title, @user.name) %>
-  <div class="row">
-    <aside class="col-md-4">
-      <section class="user_info">
-        <h1>
-          <!-- ユーザーの写真 -->
-          <%= @user.name %>
-        </h1>
-        <section class="micropost_form">
-          <%= render 'shared/mypost_form' %>
+<% provide(:title, 'マイ投稿') %>
+<div class="background">
+  <div class="container">
+    <div class="row">
+      <aside class="col-md-4">
+        <section class="user_info">
+          <h1>
+            <!-- ユーザーの写真 -->
+            <%= @user.name %>
+          </h1>
+          <section class="micropost_form">
+            <%= render 'shared/mypost_form' %>
+          </section>
         </section>
-      </section>
-    </aside>
-    <div class="col-md-8">
-      <%= render 'follow_form' if logged_in? %>
-      <% if @user.myposts.any? %>
-        <h3>Microposts (<%= @user.myposts.count %>)</h3>
-        <ol class="myposts">
+      </aside>
+      <div class="col-md-8">
+        <%= render 'follow_form' if logged_in? %>
+        <% if @user.myposts.any? %>
+        <h3>マイ投稿 一覧 (<%= @user.myposts.count %>)</h3>
+        <%= form_tag mypage_user_path, :method => 'get' do %>
+        <p>
+          <%= text_field_tag :title_s, params[:title_s], placeholder: "タイトル" %>
+          <%= text_field_tag :author_s, params[:author_s], placeholder: "著者" %>
+          <%= submit_tag "検索", :title_s => nil, :author_s => nil %>
+        </p>
+        <% end %>
+        <ol class="microposts">
           <%= render @myposts %>
         </ol>
         <%= will_paginate @myposts %>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
+</div>

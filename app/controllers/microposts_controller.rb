@@ -5,34 +5,27 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
-      @mypost = Mypost.new(content: @micropost.content, picture: @micropost.picture)
-      @mypost.save
-      flash[:success] = "Micropostを作成しました"
+      flash[:success] = "「みんなの投稿」を作成しました"
       redirect_to root_url
     else
+      flash[:danger] = "投稿に失敗しました"
       # @feed_items = []   railsチュートリアルでは一時的にこれにしてる
       @feed_items = current_user.feed.paginate(page: params[:page])
-      render 'static_pages/home'
+      redirect_to root_url
     end
   end
 
   def destroy
     @micropost.destroy
-    flash[:success] = "Micropostが削除されました"
+    flash[:success] = "「みんなの投稿」が削除されました"
     redirect_to request.referrer || root_url
     # request.referrer  このメソッドは一つ前のURLを返します
-  end
-
-  def transport
-    @micropost = Micropost.new(content: params[:content], picture: params[:picture])
-    @micropost.save
-    redirect_to root_url
   end
 
   private
 
     def micropost_params
-      params.require(:micropost).permit(:content, :picture)
+      params.require(:micropost).permit(:content, :picture, :another_picture, :title, :author)
     end
 
     def correct_user

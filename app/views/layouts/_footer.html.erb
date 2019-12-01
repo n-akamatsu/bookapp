@@ -1,0 +1,25 @@
+<% if yield(:title) != 'bookapp' %>
+<div class="background">
+  <footer>
+    <div class="container">
+      <p>お気に入りの本を共有するアプリ<br>「bookapp」</p>
+      <p>Copyright ©︎ bookapp All Rights Reserved.</p>
+      <a href="" class="twitter"><i class="fab fa-twitter"></i>ツイート</a>
+      <a href="" class="good"><i class="far fa-thumbs-up"></i>いいね！</a>
+      <a href="" class="share">シェア</a>
+      <h2>Designed by Aka</h2>
+    </div>
+  </footer>
+</div>
+<% else %>
+  <footer>
+    <div class="container">
+      <p>お気に入りの本を共有するアプリ<br>「bookapp」</p>
+      <p>Copyright ©︎ bookapp All Rights Reserved.</p>
+      <a href="" class="twitter"><i class="fab fa-twitter"></i>ツイート</a>
+      <a href="" class="good"><i class="far fa-thumbs-up"></i>いいね！</a>
+      <a href="" class="share">シェア</a>
+      <h2>Designed by Aka</h2>
+    </div>
+  </footer>
+<% end %>

@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get 'password_resets/edit'
   post "likes/:micropost_id/create" => "likes#create"
   post "likes/:micropost_id/destroy" => "likes#destroy"
-  post "microposts/transport" => "microposts#transport"
   get "static_pages/follow_page" => "static_pages#follow_page"
   get 'auth/:provider/callback', to: 'sessions#create'
 

@@ -1,24 +1,112 @@
-<% provide(:title, @user.name) %>
-  <div class="row">
-    <aside class="col-md-4">
-      <section class="user_info">
-        <h1>
-          <!-- ユーザーの写真 -->
-          <%= @user.name %>
-        </h1>
-      </section>
-      <section class="stats">
-        <%= render 'shared/stats' %>
-      </section>
-    </aside>
-    <div class="col-md-8">
-      <%= render 'follow_form' if logged_in? %>
-      <% if @user.microposts.any? %>
-        <h3>Microposts (<%= @user.microposts.count %>)</h3>
+<% provide(:title, 'プロフィール') %>
+<div class="background">
+  <div class="container">
+    <div class="row">
+      <aside class="col-md-4">
+        <section class="user_info">
+          <h1>
+            <!-- ユーザーの写真 -->
+            <%= @user.name %>
+          </h1>
+        </section>
+        <section class="stats">
+          <%= render 'shared/stats' %>
+        </section>
+      </aside>
+      <div class="col-md-8 follow-adjust">
+        <%= render 'follow_form' if logged_in? %>
+        <% if @user.microposts.any? %>
+        <h3>投稿 一覧</h3>
+        <%= form_tag user_path(@user), :method => 'get' do %>
+        <p>
+          <%= text_field_tag :title_s, params[:title_s], placeholder: "タイトル" %>
+          <%= text_field_tag :author_s, params[:author_s], placeholder: "著者" %>
+          <%= submit_tag "検索", :title_s => nil, :author_s => nil %>
+        </p>
+        <% end %>
         <ol class="microposts">
-          <%= render @microposts %>
+
+          <% @microposts.each do |micropost| %>
+          <li id="micropost-<%= micropost.id %>">
+            <!-- 上記のidはjQueryをつけるとき用 -->
+
+            <!-- ユーザーの写真 -->
+            <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+            <span class="content">
+              <span class="intro">
+                <span class="text">
+                  <span class="title">
+                    <strong>タイトル：<p></strong><%= micropost.title %></p>
+                  </span>
+                  <span class="author">
+                    <strong>著者：</strong>
+                    <p><%= micropost.author %></p>
+                  </span>
+                </span>
+                <span class="picture">
+                  <% if micropost.picture %>
+                  <% if micropost.picture.url %>
+                  <%= image_tag micropost.picture.url %>
+                  <% elsif micropost.another_picture %>
+                  <%= image_tag micropost.another_picture %>
+                  <% end %>
+                  <% end %>
+                </span>
+              </span>
+              <span class="review">
+                <strong>内容・感想：</strong><br>
+                <%= micropost.content %>
+              </span>
+            </span>
+            <span class="timestamp">
+              <%= time_ago_in_words(micropost.created_at) %>前
+
+              <span class="like">
+                <% @likes_count = Like.where(post_id: micropost.id).count %>
+                <% if current_user.id == micropost.user_id %>
+                <% if @likes_count != 0 %>
+                <span class="fa fa-heart like-btn-unlike"></span>
+                <% else %>
+                <span class="fa fa-heart like-btn"></span>
+                <% end %>
+                <%= @likes_count %>
+                <% else %>
+                <% if Like.find_by(user_id: @current_user.id, post_id: micropost.id) %>
+                <%= link_to("/likes/#{micropost.id}/destroy", {method: "post"}) do %>
+                <span class="fa fa-heart like-btn-unlike"></span>
+                <% end %>
+                <% else %>
+                <%= link_to("/likes/#{micropost.id}/create", {method: "post"}) do %>
+                <span class="fa fa-heart like-btn"></span>
+                <% end %>
+                <% end %>
+                <%= @likes_count %>
+                <% end %>
+              </span>
+
+              <% if current_user?(micropost.user) %>
+              <%= link_to "削除", micropost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+
+              <%= form_for(@mypost) do |f| %>
+              <%= f.hidden_field :title, :value => micropost.title %>
+              <%= f.hidden_field :author, :value => micropost.author %>
+              <%= f.hidden_field :content, :value => micropost.content %>
+              <% if micropost.picture.url %>
+              <%= f.hidden_field :another_picture, :value => micropost.picture.url %>
+              <% elsif micropost.another_picture %>
+              <%= f.hidden_field :another_picture, :value => micropost.another_picture %>
+              <% end %>
+              <%= f.submit "「マイポスト」に投稿！", class: "post" %>
+              <% end %>
+              <% end %>
+            </span>
+          </li>
+          <% end %>
+
         </ol>
         <%= will_paginate @microposts %>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
+</div>

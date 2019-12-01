@@ -4,21 +4,55 @@
   <!-- ユーザーの写真 -->
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content">
-    <%= micropost.content %>
-    <%= image_tag micropost.picture.url if micropost.picture? %>
-  </span>
-  <span class="timestamp">
-    <% if Like.find_by(user_id: @current_user.id, post_id: micropost.id) %>
-      <%= link_to("/likes/#{micropost.id}/destroy", {method: "post"}) do %>
-        <span class="fa fa-heart like-btn-unlike"></span>
+    <span class="intro">
+      <span class="text">
+        <span class="title">
+          <strong>タイトル：<p></strong><%= micropost.title %></p>
+        </span>
+        <span class="author">
+          <strong>著者：</strong>
+          <p><%= micropost.author %></p>
+        </span>
+      </span>
+      <span class="picture">
+        <% if micropost.picture.url %>
+          <%= image_tag micropost.picture.url %>
+        <% elsif micropost.another_picture %>
+          <%= image_tag micropost.another_picture %>
+        <% end %>
+      </span>
+    </span>
+    <span class="review">
+      <strong>内容・感想：</strong><br>
+      <%= micropost.content %>
+    </span>
+    </span>
+    <span class="timestamp">
+      <%= time_ago_in_words(micropost.created_at) %>前
+
+      <span class="like">
+        <% @likes_count = Like.where(post_id: micropost.id).count %>
+          <% if current_user.id == micropost.user_id %>
+            <% if @likes_count != 0 %>
+              <span class="fa fa-heart like-btn-unlike"></span>
+            <% else %>
+              <span class="fa fa-heart like-btn"></span>
+            <% end %>
+            <%= @likes_count %>
+          <% else %>
+            <% if Like.find_by(user_id: @current_user.id, post_id: micropost.id) %>
+              <%= link_to("/likes/#{micropost.id}/destroy", {method: "post"}) do %>
+              <span class="fa fa-heart like-btn-unlike"></span>
+            <% end %>
+          <% else %>
+            <%= link_to("/likes/#{micropost.id}/create", {method: "post"}) do %>
+            <span class="fa fa-heart like-btn"></span>
+          <% end %>
+        <% end %>
+        <%= @likes_count %>
       <% end %>
-    <% else %>
-      <%= link_to("/likes/#{micropost.id}/create", {method: "post"}) do %>
-        <span class="fa fa-heart like-btn"></span>
-      <% end %>
-    <% end %>
-    <%= @likes_count = Like.where(post_id: micropost.id).count %>
-    <%= time_ago_in_words(micropost.created_at) %>前
+    </span>
+
     <% if current_user?(micropost.user) %>
       <%= link_to "削除", micropost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
     <% end %>

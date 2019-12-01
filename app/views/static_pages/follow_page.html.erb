@@ -1,17 +1,25 @@
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <%= render 'shared/user_info' %>
-    </section>
-    <section class="stats">
-      <%= render 'shared/stats' %>
-    </section>
-    <section class="micropost_form">
-      <%= render 'shared/micropost_form' %>
-    </section>
-  </aside>
-  <div class="col-md-8">
-    <h3>投稿一覧</h3>
-    <%= render 'shared/feed' %>
+<% provide(:title, 'フォローしている人の投稿') %>
+<div class="background">
+  <div class="container">
+    <div class="row">
+      <aside class="col-md-4">
+        <section class="user_info">
+          <%= render 'shared/user_info' %>
+        </section>
+        <section class="stats">
+          <%= render 'shared/stats' %>
+        </section>
+      </aside>
+      <div class="col-md-8">
+        <h3>投稿一覧</h3>
+        <%= form_tag static_pages_follow_page_path, :method => 'get' do %>
+        <p>
+          <%= text_field_tag :title_s, params[:title_s], placeholder: "タイトル" %>
+          <%= text_field_tag :author_s, params[:author_s], placeholder: "著者" %>
+          <%= submit_tag "検索", :title_s => nil, :author_s => nil %>
+        </p>
+        <% end %>
+        <%= render 'shared/feed' %>
+      </div>
+    </div>
   </div>
-</div>

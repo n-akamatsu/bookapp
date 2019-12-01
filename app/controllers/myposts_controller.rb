@@ -5,7 +5,7 @@ class MypostsController < ApplicationController
   def create
     @mypost = current_user.myposts.build(mypost_params)
     if @mypost.save
-      flash[:success] = "Mypostを作成しました"
+      flash[:success] = "「マイ投稿」を作成しました"
       redirect_to mypage_user_path(@current_user)
     else
       flash[:danger] = "投稿に失敗しました"
@@ -15,7 +15,7 @@ class MypostsController < ApplicationController
 
   def destroy
     @mypost.destroy
-    flash[:success] = "Mypostが削除されました"
+    flash[:success] = "「マイ投稿」が削除されました"
     redirect_to request.referrer || root_url
     # request.referrer  このメソッドは一つ前のURLを返します
   end
@@ -26,7 +26,7 @@ class MypostsController < ApplicationController
   private
 
     def mypost_params
-      params.require(:mypost).permit(:content, :picture)
+      params.require(:mypost).permit(:content, :picture, :another_picture, :title, :author)
     end
 
     def correct_user

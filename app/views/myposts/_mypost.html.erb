@@ -2,30 +2,56 @@
   <!-- 上記のidはjQueryをつけるとき用 -->
 
   <!-- ユーザーの写真 -->
-  <span class="user"><%= link_to mypost.user.name, mypost.user %></span>
-  <span class="content">
-    <%= mypost.content %>
-    <%= image_tag mypost.picture.url if mypost.picture? %>
-  </span>
-  <span class="timestamp">
-    <% if Like.find_by(user_id: @current_user.id, post_id: mypost.id) %>
-      <%= link_to("/likes/#{mypost.id}/destroy", {method: "post"}) do %>
-        <span class="fa fa-heart like-btn-unlike"></span>
-      <% end %>
-    <% else %>
-      <%= link_to("/likes/#{mypost.id}/create", {method: "post"}) do %>
-        <span class="fa fa-heart like-btn"></span>
-      <% end %>
-    <% end %>
-    <%= time_ago_in_words(mypost.created_at) %>前
-    <% if current_user?(mypost.user) %>
-      <%= link_to "削除", mypost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
 
-      <%= form_tag("/microposts/transport") do %>
-        <%= hidden_field_tag :content, @mypost.content %>
-        <%= hidden_field_tag :picture, @mypost.picture %>
-        <input type="submit" value="「みんなの投稿」にも投稿！">
-      <% end %>
-    <% end %>
+  <span class="content">
+    <span class="intro">
+      <span class="text">
+        <span class="title">
+          <strong>タイトル：<p></strong><%= mypost.title %></p>
+        </span>
+        <span class="author">
+          <strong>著者：</strong>
+          <p><%= mypost.author %></p>
+        </span>
+      </span>
+      <span class="picture">
+        <% if mypost.picture.url %>
+          <%= image_tag mypost.picture.url %>
+        <% elsif mypost.another_picture %>
+            <%= image_tag mypost.another_picture %>
+        <% end %>
+      </span>
+    </span>
+    <span class="review">
+        <strong>内容・感想：</strong><br>
+        <%= mypost.content %>
+    </span>
   </span>
-</li>
+    <span class="timestamp">
+      <span class="arrange">
+        <span class="time">
+          <%= time_ago_in_words(mypost.created_at) %>前
+        </span>
+          <% if current_user?(mypost.user) %>
+        <span class="delete">
+            <%= link_to "削除", mypost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+        </span>
+        <span>
+          <%= form_for(@micropost) do |f| %>
+            <%= f.hidden_field :title, :value => mypost.title %>
+            <%= f.hidden_field :author, :value => mypost.author %>
+            <%= f.hidden_field :content, :value => mypost.content %>
+
+            <% if mypost.picture.url %>
+              <%= f.hidden_field :another_picture, :value => mypost.picture.url %>
+            <% elsif mypost.another_picture %>
+              <%= f.hidden_field :another_picture, :value => mypost.another_picture %>
+            <% end %>
+
+            <%= f.submit "「みんなの投稿」にも投稿！", class: "post" %>
+          <% end %>
+        </span>
+          <% end %>
+      </span>
+    </span>
+  </li>

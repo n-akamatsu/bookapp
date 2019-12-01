@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :following, :followers]
+  before_action :logged_in_user, only: [:show, :edit, :update, :following, :followers, :mypage]
   before_action :correct_user,  only: [:edit, :update]
 
   def new
@@ -8,14 +8,16 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
+    @microposts = @user.microposts.paginate(page: params[:page]).search(params[:title_s], params[:author_s])
     @myposts = @user.microposts.paginate(page: params[:page])
+    @mypost = current_user.myposts.build if logged_in?
   end
 
   def mypage
     @user = User.find_by(id: params[:id])
-    @myposts = @user.myposts.paginate(page: params[:page])
+    @myposts = @user.myposts.paginate(page: params[:page]).search(params[:title_s], params[:author_s])
     @mypost = current_user.myposts.build if logged_in?
+    @micropost  = current_user.microposts.build if logged_in?
   end
 
   def create
