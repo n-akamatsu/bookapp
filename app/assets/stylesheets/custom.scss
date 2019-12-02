@@ -115,6 +115,7 @@ footer{
 
 .flash{
   margin-bottom: 0;
+  text-align: center;
 }
 
 // like_btn
@@ -395,6 +396,9 @@ input {
     }
     .title{
       padding-bottom: 5px;
+      p{
+        text-align: left;
+      }
     }
     .review{
       padding-top: 25px;
