@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+# -*- coding: utf-8 -*-
 
   def new
   end

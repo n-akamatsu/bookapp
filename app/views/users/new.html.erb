@@ -23,6 +23,19 @@
 
         <%= f.submit "新規登録" , class: "btn btn-primary" %>
         <% end %>
+
+        <div class="other-login">
+          <p>
+            <%= link_to '/auth/twitter', class: "btn btn-social btn-twitter" do %>
+            <i class="fab fa-twitter"></i> Twitterアカウントでログイン
+            <% end %>
+          </p>
+          <p class="facebook">
+            <%= link_to '/auth/facebook', class: "btn btn-social btn-facebook" do %>
+            <i class="fab fa-facebook-f"></i> Facebookアカウントでログイン
+            <% end %>
+          </p>
+        </div>
       </div>
     </div>
   </div>
