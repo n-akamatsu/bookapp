@@ -462,18 +462,6 @@ span.picture {
 
   .title{
     margin: 30px auto;
-    h1{
-      font-size: 4vw;
-      font-weight: bold;
-      border-bottom: 5px solid lightgreen;
-      padding-bottom: 5px;
-      display: inline-block;
-    }
-
-    h2{
-      font-size: 2vw;
-      font-weight: 550;
-    }
   }
 
   .text{
@@ -482,15 +470,6 @@ span.picture {
 
     .micropost, .mypost{
       margin: 50px auto;
-    }
-    h3{
-      font-size: 2vw;
-      font-weight: 500;
-    }
-
-    li{
-      font-size: 1.2vw;
-      text-align: left;
     }
   }
 
@@ -509,6 +488,55 @@ span.picture {
 
     .main-btn:hover{
       opacity: 1;
+    }
+  }
+
+  h1{
+    font-size: 4vw;
+    font-weight: bold;
+    border-bottom: 5px solid lightgreen;
+    padding-bottom: 5px;
+    display: inline-block;
+  }
+
+  h2{
+    font-size: 2vw;
+    font-weight: 550;
+  }
+
+  h3{
+    font-size: 2vw;
+    font-weight: 500;
+  }
+
+  li{
+    font-size: 1.2vw;
+    text-align: left;
+  }
+
+  @media(max-width: 850px){
+    .text{
+      width: 90%;
+    }
+
+    .last{
+      .main-btn{
+        font-size: 3vw;
+        padding: 12px 45px;
+      }
+    }
+
+    h1{
+      font-size: 6vw;
+    }
+    h2{
+      font-size: 3.5vw;
+    }
+    h3{
+      font-size: 3.5vw;
+    }
+    li{
+      font-size: 2.5vw;
     }
   }
 }
