@@ -33,7 +33,7 @@ body {
     padding: 20px 30px;
     opacity: 0.9;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 20px;
   }
 
   .main-btn:hover{
@@ -111,6 +111,10 @@ footer{
   .facebook{
     margin-left: 25px;
   }
+}
+
+.flash{
+  margin-bottom: 0;
 }
 
 // like_btn
@@ -440,5 +444,67 @@ span.picture {
   margin-top: 10px;
   input {
     border: 0;
+  }
+}
+
+
+
+// aboutページ
+
+.about{
+  margin: 30px auto;
+  text-align: center;
+  color: #333;
+
+  .title{
+    margin: 30px auto;
+    h1{
+      font-size: 4vw;
+      font-weight: bold;
+      border-bottom: 5px solid lightgreen;
+      padding-bottom: 5px;
+      display: inline-block;
+    }
+
+    h2{
+      font-size: 2vw;
+      font-weight: 550;
+    }
+  }
+
+  .text{
+    margin: 100px auto;
+    width: 70%;
+
+    .micropost, .mypost{
+      margin: 50px auto;
+    }
+    h3{
+      font-size: 2vw;
+      font-weight: 500;
+    }
+
+    li{
+      font-size: 1.2vw;
+      text-align: left;
+    }
+  }
+
+  .last{
+    .main-btn{
+      font-size: 2vw;
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: #fff;
+      background-color: #794D26;
+      padding: 12px 45px;
+      opacity: 0.9;
+      text-decoration: none;
+      border-radius: 20px;
+    }
+
+    .main-btn:hover{
+      opacity: 1;
+    }
   }
 }
