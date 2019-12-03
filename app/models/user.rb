@@ -12,16 +12,15 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
-  validates :name,  presence: true, length: { maximum: 50 }
+  validates :name,  presence: true, length: { maximum: 50 }, unless: :uid?
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true, unless: :uid?
   validates :email, presence: true, unless: :uid?
   has_secure_password validations: false
-  validates :password, presence: true, unless: :uid?
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
@@ -80,12 +79,6 @@ class User < ApplicationRecord
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
-
-  # 試作feedの定義
-  # 完全な実装は次章の「ユーザーをフォローする」を参照
-  # def feed
-  #   Micropost.where("user_id = ?", id)
-  # end
 
   # ユーザーのステータスフィードを返す
   def feed
