@@ -9,29 +9,29 @@
         <%= render 'shared/error_messages', object: f.object %>
         <%# 上記を追加する場合、form-controlというCSSクラスを下記に追加することで、Bootstrapがうまく取り扱ってくれるようになる %>
 
-        <%= f.label :name, "名前" %>
+        <%= f.label :name, "名前", class: 'login-text' %>
         <%= f.text_field :name, class: 'form-control' %>
 
-        <%= f.label :email, "メールアドレス" %>
+        <%= f.label :email, "メールアドレス", class: 'login-text' %>
         <%= f.email_field :email, class: 'form-control' %>
 
-        <%= f.label :password, "パスワード" %>
+        <%= f.label :password, "パスワード", class: 'login-text' %>
         <%= f.password_field :password, class: 'form-control' %>
 
-        <%= f.label :password_confirmation, "パスワード確認" %>
+        <%= f.label :password_confirmation, "パスワード確認", class: 'login-text' %>
         <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-        <%= f.submit "新規登録" , class: "btn btn-primary" %>
+        <%= f.submit "新規登録" , class: "btn btn-primary", class: 'login-text' %>
         <% end %>
 
         <div class="other-login">
           <p>
-            <%= link_to '/auth/twitter', class: "btn btn-social btn-twitter" do %>
+            <%= link_to '/auth/twitter', class: "btn btn-social btn-twitter login-text" do %>
             <i class="fab fa-twitter"></i> Twitterアカウントでログイン
             <% end %>
           </p>
           <p class="facebook">
-            <%= link_to '/auth/facebook', class: "btn btn-social btn-facebook" do %>
+            <%= link_to '/auth/facebook', class: "btn btn-social btn-facebook login-text" do %>
             <i class="fab fa-facebook-f"></i> Facebookアカウントでログイン
             <% end %>
           </p>

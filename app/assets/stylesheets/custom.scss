@@ -513,8 +513,10 @@ span.picture {
     font-size: 1.2vw;
     text-align: left;
   }
+}
 
-  @media(max-width: 850px){
+@media(max-width:  992px){
+  .about{
     .text{
       width: 90%;
     }
@@ -538,5 +540,15 @@ span.picture {
     li{
       font-size: 2.5vw;
     }
+  }
+}
+
+@media(max-width:  992px){
+  .login-text{
+    font-size: 2vw;
+  }
+
+  .form-control{
+    padding: 30px 50px;
   }
 }
