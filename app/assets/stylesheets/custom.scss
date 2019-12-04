@@ -101,6 +101,34 @@ footer{
     padding: 3px 5px;
     font-size: 11px;
   }
+
+  @media(max-width: 992px){
+    .twitter {
+      padding: 10px 14px;
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .good {
+      padding: 10px 14px;
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .share {
+      padding: 10px 14px;
+      font-size: 20px;
+    }
+  }
+}
+
+@media(max-width: 992px){
+  footer{
+    p,h2{
+      font-size: 3vw;
+      line-height: 4vw;
+    }
+  }
 }
 
 .other-login{
@@ -549,7 +577,8 @@ span.picture {
   }
 
   .form-control{
-    padding: 30px 50px;
+    padding: 25px 20px;
+    font-size: 3vw;
   }
 }
 
