@@ -1,17 +1,20 @@
 # bookapp
-<br><br>
-
-# 概要
 お気に入りの本を投稿、共有できるアプリケーション
 <br><br>
+
+
 
 # リンク
 url: https://bookapp20191112.herokuapp.com/
 <br><br>
 
+
+
 # 使用言語・技術
 HTML, CSS, JavaScript(jQuery), Ruby, Ruby on Rails, SQL, heroku
 <br><br>
+
+
 
 # 機能詳細
 ・ユーザー登録、ログイン機能<br>
