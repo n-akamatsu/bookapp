@@ -1,5 +1,4 @@
 # bookapp
-![Uploading Bookapp1.png…]()
 <br><br>
 
 # 概要
