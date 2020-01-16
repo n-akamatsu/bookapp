@@ -1,19 +1,16 @@
 # bookapp
 お気に入りの本を投稿、共有できるアプリケーション
-<br><br>
-![](https://www.pakutaso.com/shared/img/thumb/Photoelly042_TP_V.jpg)
+![bookapp](./public/images/Bookapp1.png)
 
 
 
 # リンク
 url: https://bookapp20191112.herokuapp.com/
-<br><br>
 
 
 
 # 使用言語・技術
 HTML, CSS, JavaScript(jQuery), Ruby, Ruby on Rails, SQL, heroku
-<br><br>
 
 
 
